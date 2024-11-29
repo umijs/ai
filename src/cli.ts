@@ -53,11 +53,8 @@ async function main() {
       model: openai(model),
       // TODO: add system context
       system: `
-
 ${BasePrompt}
 ${BestPracticesPrompt}
-
-Make sure to keep a log of what, why and how you did what you did in "fyi.md". Keep it updated.
 
 Context: ${context}
 Related Files: ${files}`,

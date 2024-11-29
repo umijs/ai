@@ -1,7 +1,14 @@
 import dedent from 'dedent';
 
-export const BestPracticesPrompt = dedent`
+// TODO: extract to a separate package
+const TNFBestPracticesPrompt = dedent`
+- How to add page.
+  1. Run \`npx tnf g page {pageName}\` to generate a page.
+- How to create a tnf project.
+  1. Run \`npm create tnf --template simple\` to generate a project.
+`;
 
+export const BestPracticesPrompt = dedent`
 BEST PRACTICES:
 - Use TypeScript.
 - Use Prettier for formatting. Perferred config: printWidth: 80, singleQuote: true, trailingComma: all, proseWrap: never, importOrderSortSpecifiers: true, use @trivago/prettier-plugin-sort-imports to sort imports.
@@ -18,6 +25,9 @@ BEST PRACTICES:
 - How to add lint-staged to format files on commit.
   1. add lint-staged as dev dependency
   2. add "lint-staged": { "*.{js,jsx,ts,tsx}": ["prettier --write"] } to package.json
+- Do not use specifiers for \`fs\` and \`path\` modules.
+- Do use \`test()\` instead of \`describe() + it()\` for test cases.
 - Keep a log of what, why and how you did what you did in "fyi.md". Keep it updated.
 - Make sure the created files are ending with a new line at the end of the file.
+${TNFBestPracticesPrompt}
 `;
