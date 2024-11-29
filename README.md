@@ -8,6 +8,7 @@
 - [ ] Support interactive mode.
 - [ ] Support cursor rule file.
 - [ ] Support [Model Context Protocol](https://modelcontextprotocol.io/).
+- [ ] Best practice about react, node, tooling and etc built-in.
 
 ## Usage
 
@@ -30,7 +31,12 @@ $ tnpx @umijs/ai -p "Create a new tnf project"
 $ tnpx @umijs/ai -p "Write tests" -f "src/foo.ts"
 $ tnpx @umijs/ai -p "Add prettier"
 $ tnpx @umijs/ai -p "Add page foo"
+$ tnpx @umijs/ai -p "Install missing dependencies" -f "src/foo.ts"
 ```
+
+## CREDITS
+
+- [cali](https://github.com/callstackincubator/cali), inspired the first version of the project.
 
 ## LICENSE
 

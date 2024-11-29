@@ -1,0 +1,10 @@
+import dedent from "dedent";
+
+export const BestPracticesPrompt = dedent`
+
+BEST PRACTICES:
+- Use TypeScript.
+- Use Prettier for formatting. Perferred config: printWidth: 80, singleQuote: true, trailingComma: all, proseWrap: never, importOrderSortSpecifiers: true, use @trivago/prettier-plugin-sort-imports to sort imports.
+- Keep a log of what, why and how you did what you did in "fyi.md". Keep it updated.
+- Make sure the created files are ending with a new line at the end of the file.
+`;

@@ -1,0 +1,31 @@
+{
+  "name": "@umijs/ai",
+  "version": "0.0.1-alpha.0",
+  "bin": {
+    "uai": "./bin/ai.js"
+  },
+  "scripts": {
+    "dev": "tsx src/cli.ts"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@ai-sdk/openai": "^1.0.5",
+    "@clack/prompts": "^0.8.2",
+    "@types/yargs-parser": "^21.0.3",
+    "ai": "^4.0.9",
+    "dedent": "^1.5.3",
+    "picocolors": "^1.1.1",
+    "yargs-parser": "^21.1.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "tsx": "^4.19.2"
+  },
+  "volta": {
+    "node": "20.18.1",
+    "pnpm": "9.14.3"
+  }
+}
