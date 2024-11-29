@@ -95,7 +95,14 @@ Related Files: ${files}`,
     }
 
     // TODO: handle parsing errors
-    const data = MessageSchema.parse(JSON.parse(response.text));
+    let data: ReturnType<typeof MessageSchema.parse>;
+    try {
+      data = MessageSchema.parse(JSON.parse(response.text));
+    } catch (error) {
+      console.error(error);
+      console.log(response.text);
+      throw error;
+    }
     const answer = await (() => {
       switch (data.type) {
         case 'select':
