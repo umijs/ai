@@ -1,0 +1,32 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+# 2 space indentation
+indent_style = space
+indent_size = 2
+
+# Matches multiple files with brace expansion notation
+# Set default charset
+charset = utf-8
+
+# Trim trailing whitespace
+trim_trailing_whitespace = true
+
+# Indentation override for JS and JSON files
+[*.{js,json}]
+indent_size = 2
+
+# Indentation override for HTML and CSS files
+[*.{html,css}]
+indent_size = 2
+
+# Indentation override for Markdown files
+[*.md]
+trim_trailing_whitespace = false
