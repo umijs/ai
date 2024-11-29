@@ -36,8 +36,10 @@ $ tnpx @umijs/ai -p "Install missing dependencies" -f "src/foo.ts"
 
 ## CREDITS
 
+This project is inspired by:
+
 - [cali](https://github.com/callstackincubator/cali), inspired the first version of the project.
 
 ## LICENSE
 
-MIT
+[MIT](LICENSE)
