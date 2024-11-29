@@ -1,5 +1,5 @@
-import * as npmTools from './npm';
 import * as fsTools from './fs';
+import * as npmTools from './npm';
 
 export function getBuiltinTools() {
   return {

@@ -1,7 +1,7 @@
-import { tool } from "ai";
-import { z } from "zod";
-import fs from 'fs';
+import { tool } from 'ai';
 import { execSync } from 'child_process';
+import fs from 'fs';
+import { z } from 'zod';
 
 export const readFile = tool({
   description: 'Read file, can be used to read package.json, etc.',
@@ -11,7 +11,7 @@ export const readFile = tool({
   }),
   execute: async ({ filePath, encoding }) => {
     try {
-      const content = fs.readFileSync(filePath, encoding)
+      const content = fs.readFileSync(filePath, encoding);
       return {
         success: true,
         file: content,
@@ -19,7 +19,7 @@ export const readFile = tool({
     } catch (error) {
       return {
         error: error instanceof Error ? error.message : 'Failed to read file',
-      }
+      };
     }
   },
 });
@@ -35,11 +35,11 @@ export const writeFile = tool({
       fs.writeFileSync(filePath, content);
       return {
         success: true,
-      }
+      };
     } catch (error) {
       return {
         error: error instanceof Error ? error.message : 'Failed to write file',
-      }
+      };
     }
   },
 });
@@ -51,19 +51,23 @@ export const getFileTree = tool({
   }),
   execute: async ({ depth }) => {
     try {
-      const output = execSync(`tree -J -I "node_modules|cache|*.pyc" -L ${depth}`, {
-        cwd: process.cwd(),
-      }).toString()
-      const fileTree = JSON.parse(output)
+      const output = execSync(
+        `tree -J -I "node_modules|cache|*.pyc" -L ${depth}`,
+        {
+          cwd: process.cwd(),
+        },
+      ).toString();
+      const fileTree = JSON.parse(output);
 
       return {
         success: true,
         fileTree,
-      }
+      };
     } catch (error) {
       return {
-        error: error instanceof Error ? error.message : 'Failed to get file tree',
-      }
+        error:
+          error instanceof Error ? error.message : 'Failed to get file tree',
+      };
     }
   },
 });

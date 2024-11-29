@@ -1,4 +1,4 @@
-import dedent from "dedent";
+import dedent from 'dedent';
 
 export const BestPracticesPrompt = dedent`
 

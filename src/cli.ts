@@ -1,15 +1,14 @@
 #!/usr/bin/env node
-
-import { createOpenAI } from '@ai-sdk/openai';
-import { CoreMessage, generateText } from 'ai';
-import pc from 'picocolors';
-import assert from 'assert';
-import yParser from 'yargs-parser';
-import { confirm, log, outro, select, spinner, text } from '@clack/prompts';
-import { getBuiltinTools, getUserTools } from './tools';
-import { MessageSchema } from './types';
 import { BasePrompt } from './prompts/base';
 import { BestPracticesPrompt } from './prompts/best-practices';
+import { getBuiltinTools, getUserTools } from './tools';
+import { MessageSchema } from './types';
+import { createOpenAI } from '@ai-sdk/openai';
+import { confirm, log, outro, select, spinner, text } from '@clack/prompts';
+import { CoreMessage, generateText } from 'ai';
+import assert from 'assert';
+import pc from 'picocolors';
+import yParser from 'yargs-parser';
 
 async function main() {
   const argv = yParser(process.argv.slice(2), {
@@ -21,9 +20,11 @@ async function main() {
       f: 'files',
     },
   });
-  const prompt = argv.prompt || (await text({
-    message: 'What do you want to do?',
-  }));
+  const prompt =
+    argv.prompt ||
+    (await text({
+      message: 'What do you want to do?',
+    }));
   const model = argv.model || process.env.AI_MODEL || 'gpt-4o';
   const tools = {
     ...getBuiltinTools(),
@@ -45,7 +46,7 @@ async function main() {
   ];
 
   const s = spinner();
-  
+
   while (true) {
     s.start(pc.gray('Thinking...'));
     const response = await generateText({
@@ -66,57 +67,60 @@ Related Files: ${files}`,
     });
 
     const toolCalls = response.steps.flatMap((step) =>
-      step.toolCalls.map((toolCall) => toolCall.toolName)
+      step.toolCalls.map((toolCall) => toolCall.toolName),
     );
     if (toolCalls.length > 0) {
-      s.stop(`Tools called: ${pc.gray(toolCalls.join(', '))}`)
+      s.stop(`Tools called: ${pc.gray(toolCalls.join(', '))}`);
     } else {
-      s.stop(pc.gray('Done.'))
+      s.stop(pc.gray('Done.'));
     }
 
     for (const step of response.steps) {
       if (step.text.length > 0) {
-        messages.push({ role: 'assistant', content: step.text })
+        messages.push({ role: 'assistant', content: step.text });
       }
       if (step.toolCalls.length > 0) {
-        messages.push({ role: 'assistant', content: step.toolCalls })
+        messages.push({ role: 'assistant', content: step.toolCalls });
       }
       if (step.toolResults.length > 0) {
         // TODO: fix this upstream. for some reason, the tool does not include the type,
         // against the spec.
         for (const toolResult of step.toolResults) {
           if (!toolResult.type) {
-            toolResult.type = 'tool-result'
+            toolResult.type = 'tool-result';
           }
         }
-        messages.push({ role: 'tool', content: step.toolResults })
+        messages.push({ role: 'tool', content: step.toolResults });
       }
     }
 
     // TODO: handle parsing errors
-    const data = MessageSchema.parse(JSON.parse(response.text))
+    const data = MessageSchema.parse(JSON.parse(response.text));
     const answer = await (() => {
       switch (data.type) {
         case 'select':
           return select({
             message: data.content,
-            options: data.options.map((option) => ({ value: option, label: option })),
-          })
+            options: data.options.map((option) => ({
+              value: option,
+              label: option,
+            })),
+          });
         case 'question':
-          return text({ message: data.content })
+          return text({ message: data.content });
         case 'confirmation': {
           return confirm({ message: data.content }).then((answer) => {
-            return answer ? 'yes' : 'no'
-          })
+            return answer ? 'yes' : 'no';
+          });
         }
         case 'end':
-          log.step(data.content)
+          log.step(data.content);
       }
     })();
 
     if (typeof answer !== 'string') {
-      outro(pc.gray('Bye!'))
-      break
+      outro(pc.gray('Bye!'));
+      break;
     }
 
     messages.push({
