@@ -5,7 +5,8 @@
     "uai": "./bin/ai.js"
   },
   "scripts": {
-    "dev": "tsx src/cli.ts"
+    "dev": "tsx src/cli.ts",
+    "build": "father doctor && father build"
   },
   "files": [
     "dist"
@@ -23,6 +24,7 @@
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/node": "^22.10.1",
+    "father": "^4.5.1",
     "prettier": "^3.4.1",
     "tsx": "^4.19.2"
   },
