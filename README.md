@@ -13,7 +13,7 @@
 ## Usage
 
 ```bash
-$ tnpx @umijs/ai [options]
+$ npx @umijs/ai [options]
 ```
 
 ## Options
@@ -27,11 +27,11 @@ $ tnpx @umijs/ai [options]
 ## Examples
 
 ```bash
-$ tnpx @umijs/ai -p "Create a new tnf project"
-$ tnpx @umijs/ai -p "Write tests" -f "src/foo.ts"
-$ tnpx @umijs/ai -p "Add prettier"
-$ tnpx @umijs/ai -p "Add page foo"
-$ tnpx @umijs/ai -p "Install missing dependencies" -f "src/foo.ts"
+$ npx @umijs/ai -p "Create a new tnf project"
+$ npx @umijs/ai -p "Write tests" -f "src/foo.ts"
+$ npx @umijs/ai -p "Add prettier"
+$ npx @umijs/ai -p "Add page foo"
+$ npx @umijs/ai -p "Install missing dependencies" -f "src/foo.ts"
 ```
 
 ## CREDITS
