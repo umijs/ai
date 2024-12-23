@@ -7,6 +7,7 @@ import { createOpenAI } from '@ai-sdk/openai';
 import { confirm, log, outro, select, spinner, text } from '@clack/prompts';
 import { CoreMessage, generateText } from 'ai';
 import assert from 'assert';
+import fs from 'fs';
 import pc from 'picocolors';
 import yParser from 'yargs-parser';
 
@@ -20,17 +21,25 @@ async function main() {
       f: 'files',
     },
   });
-  const prompt =
-    argv.prompt ||
-    (await text({
-      message: 'What do you want to do?',
-    }));
+  let prompt = argv.prompt;
+  if (fs.existsSync(prompt)) {
+    prompt = fs.readFileSync(prompt, 'utf-8');
+  }
+  if (!prompt) {
+    prompt =
+      (await text({
+        message: 'What do you want to do?',
+      })) || '';
+  }
   const model = argv.model || process.env.AI_MODEL || 'gpt-4o';
   const tools = {
     ...getBuiltinTools(),
     ...getUserTools(argv.tools || []),
   };
-  const context = argv.context;
+  let context = argv.context;
+  if (fs.existsSync(context)) {
+    context = fs.readFileSync(context, 'utf-8');
+  }
   // TODO: include file contents
   const files = argv.files;
 

@@ -18,10 +18,10 @@ $ npx @umijs/ai [options]
 
 ## Options
 
-- `-p, --prompt`: The prompt to use.
+- `-p, --prompt`: The prompt to use, supports specifying a file.
 - `-m, --model`: The model to use.
 - `-t, --tools`: The tools to use.
-- `-c, --context`: The context to use.
+- `-c, --context`: The context to use, supports specifying a file.
 - `-f, --files`: The files to use, supports glob pattern.
 
 ## Examples

@@ -1,13 +1,5 @@
 import dedent from 'dedent';
 
-// TODO: extract to a separate package
-const TNFBestPracticesPrompt = dedent`
-- How to add page.
-  1. Run \`npx tnf g page {pageName}\` to generate a page.
-- How to create a tnf project.
-  1. Run \`npm create tnf --template simple\` to generate a project.
-`;
-
 export const BestPracticesPrompt = dedent`
 BEST PRACTICES:
 - Use TypeScript.
@@ -29,5 +21,4 @@ BEST PRACTICES:
 - Do use \`test()\` instead of \`describe() + it()\` for test cases.
 - Keep a log of what, why and how you did what you did in "fyi.md". Keep it updated.
 - Make sure the created files are ending with a new line at the end of the file.
-${TNFBestPracticesPrompt}
 `;
