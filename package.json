@@ -17,6 +17,7 @@
     "@clack/prompts": "^0.8.2",
     "@types/yargs-parser": "^21.0.3",
     "ai": "^4.0.9",
+    "c12": "^2.0.1",
     "dedent": "^1.5.3",
     "picocolors": "^1.1.1",
     "yargs-parser": "^21.1.1",

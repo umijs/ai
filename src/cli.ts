@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { loadConfig } from './config';
 import { BasePrompt } from './prompts/base';
 import { BestPracticesPrompt } from './prompts/best-practices';
 import { getBuiltinTools, getUserTools } from './tools';
@@ -21,6 +22,7 @@ async function main() {
       f: 'files',
     },
   });
+  const config = await loadConfig({ cwd: process.cwd() });
   let prompt = argv.prompt;
   if (fs.existsSync(prompt)) {
     prompt = fs.readFileSync(prompt, 'utf-8');
@@ -35,6 +37,7 @@ async function main() {
   const tools = {
     ...getBuiltinTools(),
     ...getUserTools(argv.tools || []),
+    ...(config.tools || {}),
   };
   let context = argv.context;
   if (fs.existsSync(context)) {
@@ -60,10 +63,10 @@ async function main() {
     s.start(pc.gray('Thinking...'));
     const response = await generateText({
       model: openai(model),
-      // TODO: add system context
       system: `
 ${BasePrompt}
 ${BestPracticesPrompt}
+${config.bestPractices || ''}
 
 Context: ${context}
 Related Files: ${files}`,
