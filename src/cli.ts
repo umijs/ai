@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { createOpenAI } from '@ai-sdk/openai';
-import { confirm, log, outro, select, spinner, text } from '@clack/prompts';
+import * as p from '@umijs/clack-prompts';
 import { CoreMessage, generateText } from 'ai';
 import assert from 'assert';
 import fs from 'fs';
@@ -29,7 +29,7 @@ async function main() {
   }
   if (!prompt) {
     prompt =
-      (await text({
+      (await p.text({
         message: 'What do you want to do?',
       })) || '';
   }
@@ -57,7 +57,7 @@ async function main() {
     { role: 'user', content: prompt },
   ];
 
-  const s = spinner();
+  const s = p.spinner();
 
   while (true) {
     s.start(pc.gray('Thinking...'));
@@ -115,7 +115,7 @@ Related Files: ${files}`,
     const answer = await (() => {
       switch (data.type) {
         case 'select':
-          return select({
+          return p.select({
             message: data.content,
             options: data.options.map((option) => ({
               value: option,
@@ -123,19 +123,19 @@ Related Files: ${files}`,
             })),
           });
         case 'question':
-          return text({ message: data.content });
+          return p.text({ message: data.content });
         case 'confirmation': {
-          return confirm({ message: data.content }).then((answer) => {
+          return p.confirm({ message: data.content }).then((answer) => {
             return answer ? 'yes' : 'no';
           });
         }
         case 'end':
-          log.step(data.content);
+          p.log.step(data.content);
       }
     })();
 
     if (typeof answer !== 'string') {
-      outro(pc.gray('Bye!'));
+      p.outro(pc.gray('Bye!'));
       break;
     }
 

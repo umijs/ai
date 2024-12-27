@@ -16,8 +16,8 @@
   ],
   "dependencies": {
     "@ai-sdk/openai": "^1.0.5",
-    "@clack/prompts": "^0.8.2",
     "@types/yargs-parser": "^21.0.3",
+    "@umijs/clack-prompts": "^0.0.4",
     "ai": "^4.0.9",
     "c12": "^2.0.1",
     "dedent": "^1.5.3",
