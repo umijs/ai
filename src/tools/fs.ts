@@ -1,6 +1,7 @@
 import { tool } from 'ai';
 import { execSync } from 'child_process';
 import fs from 'fs';
+import path from 'path';
 import { z } from 'zod';
 
 export const readFile = tool({
@@ -32,6 +33,7 @@ export const writeFile = tool({
   }),
   execute: async ({ filePath, content }) => {
     try {
+      fs.mkdirSync(path.dirname(filePath), { recursive: true });
       fs.writeFileSync(filePath, content);
       return {
         success: true,
