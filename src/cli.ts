@@ -12,6 +12,10 @@ import { BestPracticesPrompt } from './prompts/best-practices.js';
 import { getBuiltinTools, getUserTools } from './tools/index.js';
 import { MessageSchema } from './types.js';
 
+const CANCEL_TEXT = 'Operation cancelled.';
+const DEFAULT_MODEL = 'gpt-4o';
+const DEFAULT_MESSAGE = 'What do you want to do?';
+
 async function main() {
   const argv = yParser(process.argv.slice(2), {
     alias: {
@@ -30,10 +34,13 @@ async function main() {
   if (!prompt) {
     prompt =
       (await p.text({
-        message: 'What do you want to do?',
+        message: DEFAULT_MESSAGE,
       })) || '';
+    if (p.isCancel(prompt)) {
+      throw new Error(CANCEL_TEXT);
+    }
   }
-  const model = argv.model || process.env.AI_MODEL || 'gpt-4o';
+  const model = argv.model || process.env.AI_MODEL || DEFAULT_MODEL;
   const tools = {
     ...getBuiltinTools(),
     ...getUserTools(argv.tools || []),
@@ -53,7 +60,7 @@ async function main() {
   });
 
   const messages: CoreMessage[] = [
-    { role: 'system', content: 'What do you want to do?' },
+    { role: 'system', content: DEFAULT_MESSAGE },
     { role: 'user', content: prompt },
   ];
 
@@ -146,4 +153,7 @@ Related Files: ${files}`,
   }
 }
 
-main().catch(console.error);
+p.intro(`Welcome to the Umi AI CLI!`);
+main().catch((error) => {
+  p.cancel(error.message);
+});
