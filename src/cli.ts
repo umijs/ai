@@ -141,6 +141,10 @@ Related Files: ${files}`,
       }
     })();
 
+    if (p.isCancel(answer)) {
+      throw new Error(CANCEL_TEXT);
+    }
+
     if (typeof answer !== 'string') {
       p.outro(pc.gray('Bye!'));
       break;
