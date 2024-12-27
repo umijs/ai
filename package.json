@@ -5,10 +5,12 @@
     "uai": "./bin/ai.js"
   },
   "scripts": {
-    "dev": "tsx src/cli.ts",
+    "start": "node dist/cli.js",
+    "dev": "father dev",
     "build": "father doctor && father build",
     "format": "prettier --write ."
   },
+  "type": "module",
   "files": [
     "dist"
   ],

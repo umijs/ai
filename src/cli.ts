@@ -1,9 +1,4 @@
 #!/usr/bin/env node
-import { loadConfig } from './config';
-import { BasePrompt } from './prompts/base';
-import { BestPracticesPrompt } from './prompts/best-practices';
-import { getBuiltinTools, getUserTools } from './tools';
-import { MessageSchema } from './types';
 import { createOpenAI } from '@ai-sdk/openai';
 import { confirm, log, outro, select, spinner, text } from '@clack/prompts';
 import { CoreMessage, generateText } from 'ai';
@@ -11,6 +6,11 @@ import assert from 'assert';
 import fs from 'fs';
 import pc from 'picocolors';
 import yParser from 'yargs-parser';
+import { loadConfig } from './config.js';
+import { BasePrompt } from './prompts/base.js';
+import { BestPracticesPrompt } from './prompts/best-practices.js';
+import { getBuiltinTools, getUserTools } from './tools/index.js';
+import { MessageSchema } from './types.js';
 
 async function main() {
   const argv = yParser(process.argv.slice(2), {

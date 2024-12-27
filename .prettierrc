@@ -3,6 +3,7 @@
   "singleQuote": true,
   "trailingComma": "all",
   "proseWrap": "never",
-  "importOrderSortSpecifiers": true,
-  "plugins": ["@trivago/prettier-plugin-sort-imports"]
+  "plugins": ["@trivago/prettier-plugin-sort-imports"],
+  "importOrder": ["^@?\\w", "^@/", "^[./]"],
+  "importOrderSortSpecifiers": true
 }

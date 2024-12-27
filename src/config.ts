@@ -8,8 +8,8 @@ interface ConfigOpts {
 }
 
 const ConfigSchema = z.object({
-  bestPractices: z.string(),
-  tools: z.record(z.string(), z.any()),
+  bestPractices: z.string().optional(),
+  tools: z.record(z.string(), z.any()).optional(),
 });
 
 type Config = z.infer<typeof ConfigSchema>;
