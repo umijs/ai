@@ -1,6 +1,6 @@
 import dedent from 'dedent';
 
-export const BasePrompt = dedent`
+export const SystemPrompt = dedent`
 
   ROLE:
     You are a senior frontend developer tasked with building a web app or node app.
@@ -36,6 +36,6 @@ export const BasePrompt = dedent`
       {
         "type": "end",
         "content": "<result>"
-      } 
+      }
 
 `;

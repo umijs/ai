@@ -11,6 +11,8 @@
     "format": "prettier --write ."
   },
   "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "bin",
     "dist"

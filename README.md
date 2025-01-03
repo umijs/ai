@@ -1,15 +1,5 @@
 # @umijs/ai
 
-## Features
-
-- [ ] Support OpenAI, Anthropic, Google, etc.
-- [ ] Support custom model.
-- [ ] Support custom tools.
-- [ ] Support interactive mode.
-- [ ] Support cursor rule file.
-- [ ] Support [Model Context Protocol](https://modelcontextprotocol.io/).
-- [ ] Best practice about react, node, tooling and etc built-in.
-
 ## Usage
 
 ```bash
@@ -18,20 +8,37 @@ $ npx @umijs/ai [options]
 
 ## Options
 
-- `-p, --prompt`: The prompt to use, supports specifying a file.
-- `-m, --model`: The model to use.
-- `-t, --tools`: The tools to use.
-- `-c, --context`: The context to use, supports specifying a file.
-- `-f, --files`: The files to use, supports glob pattern.
+- `--model`: The model to use.
+- `--message`: The message to use.
 
 ## Examples
 
 ```bash
-$ npx @umijs/ai -p "Create a new tnf project"
-$ npx @umijs/ai -p "Write tests" -f "src/foo.ts"
-$ npx @umijs/ai -p "Add prettier"
-$ npx @umijs/ai -p "Add page foo"
-$ npx @umijs/ai -p "Install missing dependencies" -f "src/foo.ts"
+$ npx @umijs/ai --message "Create a new tnf project"
+$ npx @umijs/ai --message "Write tests for src/foo.ts"
+$ npx @umijs/ai --message "Add prettier"
+$ npx @umijs/ai --message "Add page foo"
+$ npx @umijs/ai --message "Install missing dependencies for src/foo.ts"
+```
+
+## API
+
+```ts
+import { chat } from '@umijs/ai';
+import * as p from '@umijs/clack-prompts';
+
+p.intro(`Welcome!`);
+chat({
+  message: 'Create a new tnf project',
+  model: 'gpt-4o',
+  verbose: true,
+})
+  .then(() => {
+    p.outro(pc.gray('Bye!'));
+  })
+  .catch((error) => {
+    p.cancel(error.message);
+  });
 ```
 
 ## CREDITS
