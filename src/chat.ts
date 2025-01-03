@@ -58,10 +58,9 @@ export async function chat(opts: ChatOptions) {
     apiKey: OPENAI_API_KEY,
   });
 
-  const task = p.taskLog('Thinking...');
-
-  const toolsCalled: string[] = [];
   while (true) {
+    const toolsCalled: string[] = [];
+    const task = p.taskLog('Thinking...');
     const response = await generateText({
       model: openai(opts.model || 'gpt-4o'),
       system: `
