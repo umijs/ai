@@ -10,9 +10,6 @@ export const installNpmPackage = tool({
   }),
   execute: async ({ packageNames, dev }) => {
     try {
-      console.log(
-        `Installing ${packageNames.join(', ')} ${dev ? '--save-dev' : ''}`,
-      );
       execSync(
         `pnpm install ${packageNames.join(' ')} ${dev ? '--save-dev' : ''}`,
         {
