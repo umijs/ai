@@ -1,5 +1,10 @@
 # @umijs/ai
 
+[![](https://badgen.net/npm/v/@umijs/ai)](https://www.npmjs.com/package/@umijs/ai)
+[![](https://badgen.net/npm/dm/@umijs/ai)](https://www.npmjs.com/package/@umijs/ai)
+[![](https://github.com/umijs/ai/actions/workflows/ci.yml/badge.svg)](https://github.com/umijs/ai/actions/workflows/ci.yml)
+[![](https://badgen.net/npm/license/umi)](https://www.npmjs.com/package/@umijs/ai)
+
 ## Usage
 
 ```bash
