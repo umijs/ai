@@ -7,8 +7,10 @@
   "scripts": {
     "start": "node dist/cli.js",
     "dev": "father dev",
-    "build": "father doctor && father build",
-    "format": "prettier --write ."
+    "build": "father build",
+    "format": "prettier --write .",
+    "release": "father doctor && npm run build && npm version patch && npm publish && git push --tags",
+    "release:minor": "father doctor && npm run build && npm version minor && npm publish && git push --tags"
   },
   "type": "module",
   "main": "dist/index.js",
